@@ -11,8 +11,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @RequiredArgsConstructor
 public class MeetingService {
@@ -25,15 +23,15 @@ public class MeetingService {
     public Meeting save(AddMeetingRequest request) {
         Meeting meeting = Meeting.from(request);
 
-        if (!request.getUserNames().isEmpty()) {
-            for (String userName : request.getUserNames()) {
-                Optional<User> user = userRepository.findByName(userName);
+        if (request.getUserNames().isEmpty()) {
+            throw new IllegalArgumentException("참석자가 존재하지 않습니다.");
+        }
 
-                if (user.isPresent()) {
-                    Attendance attendance = new Attendance(user.get(), meeting);
-                    attendanceRepository.save(attendance);
-                }
-            }
+        for (String userName : request.getUserNames()) {
+            User user = userRepository.findByName(userName).orElseThrow(() -> new IllegalArgumentException("해당 User는 존재하지 않습니다."));
+
+            Attendance attendance = new Attendance(user, meeting);
+            attendanceRepository.save(attendance);
         }
         return meetingRepository.save(meeting);
     }
