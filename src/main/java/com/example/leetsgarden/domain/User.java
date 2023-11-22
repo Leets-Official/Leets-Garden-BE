@@ -33,9 +33,6 @@ public class User {
     private String teamType;
 
     @Column
-    private String nickname;
-
-    @Column
     private String major;
 
     @Column
