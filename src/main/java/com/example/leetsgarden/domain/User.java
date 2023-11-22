@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity(name = "user")
+@Entity(name = "users")
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -18,7 +18,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String user_id;
+    private String userId;
 
     @Column(nullable = false)
     private String password;
@@ -30,7 +30,7 @@ public class User {
     private String role;
 
     @Column
-    private String team_type;
+    private String teamType;
 
     @Column
     private String nickname;
@@ -39,7 +39,7 @@ public class User {
     private String major;
 
     @Column
-    private int student_number;
+    private int studentNumber;
 
     @ManyToMany
     private List<Meeting> meetingList;
