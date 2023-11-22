@@ -16,7 +16,7 @@ public class Attendance {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column
     private boolean isAttended;
 
     @OneToOne(fetch = FetchType.EAGER)
