@@ -32,8 +32,8 @@ public class Meeting {
     @Column
     private  String color;
 
-    @ManyToMany(mappedBy = "meeting", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private List<User> users;
+    @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    private List<User> userList;
 
 
 }
