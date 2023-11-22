@@ -30,9 +30,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-
-    // db 테스트용 h2 (db 연결시 제거 요망)
-    runtimeOnly 'com.h2database:h2'
 }
 
 tasks.named('bootBuildImage') {
