@@ -31,7 +31,7 @@ public class Meeting {
     @Column
     private String color;
 
-    @OneToMany
+    @OneToMany(mappedBy = "meeting")
     private List<Attendance> attendanceList;
 
     public static Meeting from(AddMeetingRequest request) {
