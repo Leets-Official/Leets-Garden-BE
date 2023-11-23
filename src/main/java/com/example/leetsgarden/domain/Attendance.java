@@ -19,7 +19,20 @@ public class Attendance {
     @Column
     private boolean isAttended;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @ManyToOne
+    private User user;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Meeting meeting;
 
+    public Attendance(User user, Meeting meeting, boolean isAttended) {
+        this.user = user;
+        this.meeting = meeting;
+        this.isAttended = isAttended;
+    }
+
+    public Attendance(User user, Meeting meeting) {
+        this.user = user;
+        this.meeting = meeting;
+    }
 }

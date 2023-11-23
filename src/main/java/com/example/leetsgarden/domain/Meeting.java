@@ -1,14 +1,13 @@
 package com.example.leetsgarden.domain;
+import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -21,7 +20,7 @@ public class Meeting {
     private LocalDateTime dateTime;
 
     @Column(nullable = false)
-    private  String type;
+    private String type;
 
     @Column
     private String place;
@@ -30,10 +29,18 @@ public class Meeting {
     private String content;
 
     @Column
-    private  String color;
+    private String color;
 
-    @ManyToMany(mappedBy = "userList", fetch = FetchType.EAGER)
-    private List<User> userList;
+    @OneToMany(mappedBy = "meeting")
+    private List<Attendance> attendanceList;
 
-
+    public static Meeting from(AddMeetingRequest request) {
+        return Meeting.builder()
+                .dateTime(request.getDateTime())
+                .type(request.getType())
+                .place(request.getPlace())
+                .content(request.getContent())
+                .color(request.getColor())
+                .build();
+    }
 }
