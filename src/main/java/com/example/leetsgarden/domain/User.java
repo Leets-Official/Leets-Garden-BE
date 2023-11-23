@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-@Entity(name = "users")
+@Entity
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
@@ -36,9 +36,9 @@ public class User {
     private String major;
 
     @Column
-    private int studentNumber;
+    private Integer studentNumber;
 
-    @ManyToMany
-    private List<Meeting> meetingList;
-
+    @OneToMany(mappedBy = "user")
+    private List<Attendance> attendanceList;
 }
+
