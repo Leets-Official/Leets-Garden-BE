@@ -28,7 +28,7 @@ public class MeetingService {
         }
 
         for (String userName : request.getUserNames()) {
-            User user = userRepository.findByName(userName).orElseThrow(() -> new IllegalArgumentException("해당 User는 존재하지 않습니다."));
+            User user = userRepository.findByUserId(userName).orElseThrow(() -> new IllegalArgumentException("해당 User는 존재하지 않습니다."));
 
             Attendance attendance = new Attendance(user, meeting);
             attendanceRepository.save(attendance);
