@@ -23,15 +23,15 @@ public class Attendance {
     private User user;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private Meeting meeting;
+    private Template meeting;
 
-    public Attendance(User user, Meeting meeting, boolean isAttended) {
+    public Attendance(User user, Template meeting, boolean isAttended) {
         this.user = user;
         this.meeting = meeting;
         this.isAttended = isAttended;
     }
 
-    public Attendance(User user, Meeting meeting) {
+    public Attendance(User user, Template meeting) {
         this.user = user;
         this.meeting = meeting;
     }

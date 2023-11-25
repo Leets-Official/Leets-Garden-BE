@@ -1,46 +1,54 @@
 package com.example.leetsgarden.domain;
-import com.example.leetsgarden.dto.request.AddMeetingRequest;
+
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.DayOfWeek;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.time.temporal.TemporalAdjusters;
 
 @Entity
 @Getter
+@Setter
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Meeting {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long meetingId;
 
     @Column
-    private LocalDateTime dateTime;
-
-    @Column(nullable = false)
-    private String type;
+    private String meetingDay;
 
     @Column
-    private String place;
+    private LocalDateTime thisWeekMeetingDate;
 
     @Column
-    private String content;
+    private LocalDateTime nextWeekMeetingDate;
 
-    @Column
-    private String color;
+    @ManyToOne
+    @JoinColumn(name = "template")
+    private Template template;
 
-    @OneToMany(mappedBy = "meeting")
-    private List<Attendance> attendanceList;
+    public void setMeetingDay(String meetingDay) {
+        // 현재 날짜와 시간
+        LocalDateTime now = LocalDateTime.now();
 
-    public static Meeting from(AddMeetingRequest request) {
-        return Meeting.builder()
-                .dateTime(request.getDateTime())
-                .type(request.getType())
-                .place(request.getPlace())
-                .content(request.getContent())
-                .color(request.getColor())
-                .build();
+        // 입력된 요일을 DayOfWeek 열거형으로 변환
+        DayOfWeek dayOfWeek = DayOfWeek.valueOf(meetingDay.toUpperCase());
+
+        // 최근 날짜 계산
+        LocalDateTime thisWeek = now.with(TemporalAdjusters.previousOrSame(dayOfWeek));
+
+        // 다음 주 날짜 계산
+        LocalDateTime nextWeek = now.with(TemporalAdjusters.next(dayOfWeek));
+
+        // 결과를 필드에 할당
+        this.thisWeekMeetingDate = thisWeek;
+        this.nextWeekMeetingDate = nextWeek;
+
+
     }
 }

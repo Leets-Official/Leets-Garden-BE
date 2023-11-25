@@ -1,17 +1,15 @@
 package com.example.leetsgarden.dto.request;
-
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
+
 
 @Getter
+@Setter
 public class AddMeetingRequest {
+    @NotBlank(message = "Meeting day must not be blank")
+    private String meetingDay;
 
-    private LocalDateTime dateTime;
-    private String type;
-    private String place;
-    private String content;
-    private String color;
-    private List<String> userNames;
+    private Long templateId;
 }
