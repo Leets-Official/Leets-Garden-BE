@@ -1,5 +1,6 @@
 package com.example.leetsgarden.dto.response;
 
+import com.example.leetsgarden.domain.Attendance;
 import com.example.leetsgarden.domain.Authority;
 import com.example.leetsgarden.domain.User;
 import lombok.AllArgsConstructor;
@@ -28,6 +29,7 @@ public class SignResponse {
     private Integer studentNumber;
 
     private List<Authority> roles = new ArrayList<>();
+    private List<Attendance> attendanceList = new ArrayList<>();
 
     private String token;
     private Boolean result;
@@ -39,6 +41,7 @@ public class SignResponse {
         this.name = user.getName();
         this.teamType = user.getMajor();
         this.studentNumber = user.getStudentNumber();
+        this.attendanceList = user.getAttendanceList();
         this.roles = user.getRoles();
         this.result = result;
         this.message = message;

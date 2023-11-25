@@ -1,15 +1,14 @@
 package com.example.leetsgarden.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
 public class Attendance {
 
     @Id
@@ -19,7 +18,9 @@ public class Attendance {
     @Column
     private boolean isAttended;
 
-    @ManyToOne
+    @JoinColumn(name = "userId")
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonIgnore
     private User user;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
