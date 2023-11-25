@@ -5,10 +5,10 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @Getter
+@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Attendance {
 
     @Id
@@ -18,9 +18,7 @@ public class Attendance {
     @Column
     private boolean isAttended;
 
-    @JoinColumn(name = "userId")
-    @ManyToOne(fetch = FetchType.LAZY)
-//    @JsonIgnore
+    @ManyToOne
     private User user;
 
     @ManyToOne(cascade = CascadeType.PERSIST)

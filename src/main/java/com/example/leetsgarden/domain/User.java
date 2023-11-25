@@ -15,28 +15,35 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Long id;
 
     @Column(nullable = false)
     private String userId;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
     @Column(nullable = false)
+    @JsonIgnore
     private String name;
 
     @Column
+    @JsonIgnore
     private String teamType;
 
     @Column
+    @JsonIgnore
     private String major;
 
     @Column
+    @JsonIgnore
     private Integer studentNumber;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default
+    @JsonIgnore
     private List<Authority> roles = new ArrayList<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

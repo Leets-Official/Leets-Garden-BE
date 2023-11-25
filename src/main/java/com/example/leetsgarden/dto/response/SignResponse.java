@@ -16,21 +16,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SignResponse {
+
     private Long id;
-
     private String userId;
-
     private String name;
-
     private String teamType;
-
     private String major;
-
     private Integer studentNumber;
-
     private List<Authority> roles = new ArrayList<>();
     private List<Attendance> attendanceList = new ArrayList<>();
-
     private String token;
     private Boolean result;
     private String message;
@@ -39,7 +33,8 @@ public class SignResponse {
         this.id = user.getId();
         this.userId = user.getUserId();
         this.name = user.getName();
-        this.teamType = user.getMajor();
+        this.teamType = user.getTeamType();
+        this.major = user.getMajor();
         this.studentNumber = user.getStudentNumber();
         this.attendanceList = user.getAttendanceList();
         this.roles = user.getRoles();

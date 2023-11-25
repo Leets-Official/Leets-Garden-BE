@@ -33,15 +33,6 @@ public class SignService {
                 messsage = "비밀 번호가 틀립니다.";
 
                 SignResponse signResponse = SignResponse.builder()
-                        .id(null)
-                        .userId(null)
-                        .name(null)
-                        .major(null)
-                        .teamType(null)
-                        .studentNumber(null)
-                        .attendanceList(null)
-                        .roles(null)
-                        .token(null)
                         .result(false)
                         .message(messsage)
                         .build();
@@ -61,19 +52,9 @@ public class SignService {
                     .message("로그인 성공")
                     .build();
             return new ResponseEntity<>(signResponse, HttpStatus.OK);
-
         }else{
             messsage = "계정이 존재하지 않습니다.";
             SignResponse signResponse=  SignResponse.builder()
-                    .id(null)
-                    .userId(null)
-                    .name(null)
-                    .major(null)
-                    .teamType(null)
-                    .studentNumber(null)
-                    .attendanceList(null)
-                    .roles(null)
-                    .token(null)
                     .result(false)
                     .message(messsage)
                     .build();
@@ -92,10 +73,7 @@ public class SignService {
                     .teamType(request.getTeamType())
                     .studentNumber(request.getStudentNumber())
                     .build();
-
-
             user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
-
             if (userRepository.countUserByUserId(user.getUserId())==0){
                 userRepository.save(user);
             }else{
@@ -115,15 +93,6 @@ public class SignService {
             return new ResponseEntity<>(new SignResponse(user, true,"계정 조회 성공"), HttpStatus.OK);
         }else{
             SignResponse signResponse = SignResponse.builder()
-                    .id(null)
-                    .userId(null)
-                    .name(null)
-                    .major(null)
-                    .teamType(null)
-                    .studentNumber(null)
-                    .attendanceList(null)
-                    .roles(null)
-                    .token(null)
                     .result(false)
                     .message("계정이 존재하지 않습니다.")
                     .build();
