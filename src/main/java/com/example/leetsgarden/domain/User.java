@@ -31,25 +31,12 @@ public class User {
 
     @Column
     @JsonIgnore
-    private String teamType;
-
-    @Column
-    @JsonIgnore
-    private String major;
-
-    @Column
-    @JsonIgnore
-    private Integer studentNumber;
+    private String fieldType;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Builder.Default
     @JsonIgnore
     private List<Authority> roles = new ArrayList<>();
-
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Builder.Default
-    @JsonIgnore
-    private List<Attendance> attendanceList = new ArrayList<>();
 
     public void setRoles(List<Authority> role) {
         this.roles = role;

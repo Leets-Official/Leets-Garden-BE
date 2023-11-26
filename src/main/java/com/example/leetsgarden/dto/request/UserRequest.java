@@ -13,9 +13,5 @@ public class UserRequest {
 
     private String name;
 
-    private String teamType;
-
-    private String major;
-
-    private Integer studentNumber;
+    private String fieldType;
 }

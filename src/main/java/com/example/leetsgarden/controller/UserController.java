@@ -22,7 +22,7 @@ public class UserController {
         return userService.register(request);
     }
 
-    @GetMapping("/user/get")
+    @GetMapping("/user")
     public ResponseEntity<UserResponse> getUser(@RequestParam String id) throws Exception {
         return userService.getUser(id);
     }
