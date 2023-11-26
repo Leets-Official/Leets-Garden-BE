@@ -17,8 +17,8 @@ public class Template {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private LocalDateTime dateTime;
+    // @Column
+    // private LocalDateTime dateTime;
 
     @Column
     private String meetingName;
@@ -38,14 +38,19 @@ public class Template {
     @OneToMany
     private List<Attendance> attendanceList;
 
+
     public static Template from(AddTemplateRequest request) {
         return Template.builder()
-                .dateTime(request.getDateTime())
+                //.dateTime(request.getDateTime())
                 .type(request.getType())
                 .meetingName(request.getMeetingName())
                 .place(request.getPlace())
                 .content(request.getContent())
                 .color(request.getColor())
                 .build();
+    }
+
+    public List<Attendance> getAttendanceList() {
+        return attendanceList;
     }
 }

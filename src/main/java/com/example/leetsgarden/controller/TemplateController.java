@@ -1,10 +1,13 @@
 package com.example.leetsgarden.controller;
 
+import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.Template;
 import com.example.leetsgarden.dto.request.AddTemplateRequest;
 import com.example.leetsgarden.dto.response.TemplateResponse;
+import com.example.leetsgarden.service.MeetingService;
 import com.example.leetsgarden.service.TemplateService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,9 +15,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/template")
 @RequiredArgsConstructor
+
+
 public class TemplateController {
 
+    @Autowired
     private final TemplateService templateService;
+    private final MeetingService meetingService;
 
     @PostMapping
     public ResponseEntity<TemplateResponse> save(@RequestBody AddTemplateRequest request) {
@@ -33,6 +40,4 @@ public class TemplateController {
         Template updatedTemplate = templateService.update(id, request);
         return ResponseEntity.ok().body(TemplateResponse.from(updatedTemplate));
     }
-
-
 }

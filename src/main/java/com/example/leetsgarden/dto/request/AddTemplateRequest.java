@@ -10,7 +10,7 @@ import java.util.List;
 
 public class AddTemplateRequest {
 
-    private LocalDateTime dateTime;
+    //private LocalDateTime dateTime;
     private String type;
     private String meetingName;
     private String place;

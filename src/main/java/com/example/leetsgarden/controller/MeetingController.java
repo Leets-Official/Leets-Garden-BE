@@ -4,6 +4,7 @@ import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.service.MeetingService;
+import com.example.leetsgarden.service.TemplateService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,20 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class MeetingController {
 
     private final MeetingService meetingService;
-
+    private final TemplateService templateService;
     @Autowired
-    public MeetingController(MeetingService meetingService) {
+    public MeetingController(MeetingService meetingService, TemplateService templateService) {
         this.meetingService = meetingService;
+        this.templateService = templateService;
     }
-
     @PostMapping
     public ResponseEntity<MeetingResponse> createMeeting(@Valid @RequestBody AddMeetingRequest request) {
         Meeting createdMeeting = meetingService.createMeeting(request);
-
-        // 생성된 Meeting 정보로 응답 생성
         MeetingResponse meetingResponse = MeetingResponse.fromMeeting(createdMeeting);
 
-        // 생성된 Meeting 정보와 함께 201 Created 응답 반환
         return ResponseEntity.status(HttpStatus.CREATED).body(meetingResponse);
     }
 }

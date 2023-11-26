@@ -13,7 +13,7 @@ import java.util.List;
 public class TemplateResponse {
 
     private Long id;
-    private LocalDateTime dateTime;
+   // private LocalDateTime dateTime;
     private String type;
     private String place;
     private String meetingName;
@@ -24,7 +24,7 @@ public class TemplateResponse {
     public static TemplateResponse from(Template template) {
         return TemplateResponse.builder()
                 .id(template.getId())
-                .dateTime(template.getDateTime())
+                //.dateTime(template.getDateTime())
                 .type(template.getType())
                 .meetingName(template.getMeetingName())
                 .place(template.getPlace())
@@ -33,4 +33,5 @@ public class TemplateResponse {
                 .attendanceList(template.getAttendanceList())
                 .build();
     }
+
 }
