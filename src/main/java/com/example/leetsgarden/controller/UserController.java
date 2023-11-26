@@ -26,9 +26,4 @@ public class UserController {
     public ResponseEntity<UserResponse> getUser(@RequestParam String id) throws Exception {
         return userService.getUser(id);
     }
-
-    @GetMapping("/admin/get")
-    public ResponseEntity<UserResponse> getUserForAdmin(@RequestParam String id) throws Exception {
-        return userService.getUser(id);
-    }
 }

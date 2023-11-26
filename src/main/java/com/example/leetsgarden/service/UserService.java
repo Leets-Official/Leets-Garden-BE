@@ -23,7 +23,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
-    @Transactional
+
     public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
         String messsage;
         if (userRepository.countUserByUserId(request.getUserid())==1){
@@ -62,7 +62,6 @@ public class UserService {
         }
     }
 
-    @Transactional
     public ResponseEntity<RegisterResponse> register(UserRequest request) throws Exception {
         try {
             User user = User.builder()
@@ -86,7 +85,6 @@ public class UserService {
         return new ResponseEntity<>(new RegisterResponse(true, "회원가입 성공"), HttpStatus.OK);
     }
 
-    @Transactional
     public ResponseEntity<UserResponse> getUser(String id) throws Exception {
         if (userRepository.countUserByUserId(id)==1){
             User user = userRepository.findByUserId(id).get();
