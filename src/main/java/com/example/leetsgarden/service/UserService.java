@@ -25,20 +25,17 @@ public class UserService {
     private final JwtProvider jwtProvider;
 
     public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
-        String messsage;
-        if (userRepository.countUserByUsername(request.getUsername())==1){
+        if (userRepository.countUserByUsername(request.getUsername())==1) {
             User user = userRepository.findByUsername(request.getUsername()).get();
 
             if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-                messsage = "비밀 번호가 틀립니다.";
-
                 UserResponse signResponse = UserResponse.builder()
                         .result(false)
-                        .message(messsage)
+                        .message("비밀 번호가 틀립니다.")
                         .build();
                 return new ResponseEntity<>(signResponse, HttpStatus.UNAUTHORIZED);
             }
-            UserResponse signResponse= UserResponse.builder()
+            UserResponse signResponse = UserResponse.builder()
                     .id(user.getId())
                     .username(user.getUsername())
                     .name(user.getName())
@@ -52,14 +49,12 @@ public class UserService {
                     .message("로그인 성공")
                     .build();
             return new ResponseEntity<>(signResponse, HttpStatus.OK);
-        }else{
-            messsage = "계정이 존재하지 않습니다.";
-            UserResponse signResponse=  UserResponse.builder()
-                    .result(false)
-                    .message(messsage)
-                    .build();
-            return new ResponseEntity<>(signResponse, HttpStatus.NOT_FOUND);
         }
+        UserResponse signResponse=  UserResponse.builder()
+                .result(false)
+                .message("계정이 존재하지 않습니다.")
+                .build();
+        return new ResponseEntity<>(signResponse, HttpStatus.NOT_FOUND);
     }
 
     public ResponseEntity<RegisterResponse> register(UserRequest request) throws Exception {

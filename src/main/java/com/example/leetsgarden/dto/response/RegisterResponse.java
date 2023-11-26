@@ -1,5 +1,6 @@
 package com.example.leetsgarden.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,11 +8,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class RegisterResponse {
     private boolean result;
     private String message;
-    public RegisterResponse(boolean result, String message) {
-        this.result = result;
-        this.message = message;
-    }
 }
