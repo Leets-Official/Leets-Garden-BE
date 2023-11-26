@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SignResponse {
+public class UserResponse {
 
     private Long id;
     private String userId;
@@ -29,7 +29,7 @@ public class SignResponse {
     private Boolean result;
     private String message;
 
-    public SignResponse(User user, Boolean result, String message) {
+    public UserResponse(User user, Boolean result, String message) {
         this.id = user.getId();
         this.userId = user.getUserId();
         this.name = user.getName();

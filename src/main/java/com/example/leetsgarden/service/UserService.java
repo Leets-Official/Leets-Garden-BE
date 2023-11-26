@@ -2,9 +2,9 @@ package com.example.leetsgarden.service;
 
 import com.example.leetsgarden.domain.Authority;
 import com.example.leetsgarden.domain.User;
-import com.example.leetsgarden.dto.request.SignRequest;
+import com.example.leetsgarden.dto.request.UserRequest;
 import com.example.leetsgarden.dto.response.RegisterResponse;
-import com.example.leetsgarden.dto.response.SignResponse;
+import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.repository.UserRepository;
 import com.example.leetsgarden.security.JwtProvider;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ import java.util.Collections;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class SignService {
+public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
     @Transactional
-    public ResponseEntity<SignResponse> login(SignRequest request) throws Exception {
+    public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
         String messsage;
         if (userRepository.countUserByUserId(request.getUserid())==1){
             User user = userRepository.findByUserId(request.getUserid()).get();
@@ -32,13 +32,13 @@ public class SignService {
             if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
                 messsage = "비밀 번호가 틀립니다.";
 
-                SignResponse signResponse = SignResponse.builder()
+                UserResponse signResponse = UserResponse.builder()
                         .result(false)
                         .message(messsage)
                         .build();
                 return new ResponseEntity<>(signResponse, HttpStatus.UNAUTHORIZED);
             }
-            SignResponse signResponse= SignResponse.builder()
+            UserResponse signResponse= UserResponse.builder()
                     .id(user.getId())
                     .userId(user.getUserId())
                     .name(user.getName())
@@ -54,7 +54,7 @@ public class SignService {
             return new ResponseEntity<>(signResponse, HttpStatus.OK);
         }else{
             messsage = "계정이 존재하지 않습니다.";
-            SignResponse signResponse=  SignResponse.builder()
+            UserResponse signResponse=  UserResponse.builder()
                     .result(false)
                     .message(messsage)
                     .build();
@@ -63,7 +63,7 @@ public class SignService {
     }
 
     @Transactional
-    public ResponseEntity<RegisterResponse> register(SignRequest request) throws Exception {
+    public ResponseEntity<RegisterResponse> register(UserRequest request) throws Exception {
         try {
             User user = User.builder()
                     .userId(request.getUserid())
@@ -87,12 +87,12 @@ public class SignService {
     }
 
     @Transactional
-    public ResponseEntity<SignResponse> getUser(String id) throws Exception {
+    public ResponseEntity<UserResponse> getUser(String id) throws Exception {
         if (userRepository.countUserByUserId(id)==1){
             User user = userRepository.findByUserId(id).get();
-            return new ResponseEntity<>(new SignResponse(user, true,"계정 조회 성공"), HttpStatus.OK);
+            return new ResponseEntity<>(new UserResponse(user, true,"계정 조회 성공"), HttpStatus.OK);
         }else{
-            SignResponse signResponse = SignResponse.builder()
+            UserResponse signResponse = UserResponse.builder()
                     .result(false)
                     .message("계정이 존재하지 않습니다.")
                     .build();

@@ -1,12 +1,11 @@
 package com.example.leetsgarden.dto.request;
 
-import jakarta.persistence.Column;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class SignRequest {
+public class UserRequest {
     private Long id;
 
     private String userid;
