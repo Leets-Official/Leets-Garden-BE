@@ -32,6 +32,7 @@ public class JwtProvider {
 
     // 만료시간 : 1Hour
     private static final long EXP = 1000L * 60 * 60;
+    private static final String BEARER = "BEARER ";
 
     private final JpaUserDetailsService userDetailsService;
 
@@ -75,7 +76,7 @@ public class JwtProvider {
     public boolean validateToken(String token) {
         try {
             // Bearer 검증
-            if (!token.substring(0, "BEARER ".length()).equalsIgnoreCase("BEARER ")) {
+            if (!token.substring(0, BEARER.length()).equalsIgnoreCase(BEARER)) {
                 return false;
             }
             token = token.split(" ")[1].trim();
