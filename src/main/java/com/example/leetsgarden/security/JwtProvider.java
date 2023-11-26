@@ -31,7 +31,7 @@ public class JwtProvider {
     private Key secretKey;
 
     // 만료시간 : 1Hour
-    private final long exp = 1000L * 60 * 60;
+    private static final long EXP = 1000L * 60 * 60;
 
     private final JpaUserDetailsService userDetailsService;
 
@@ -49,7 +49,7 @@ public class JwtProvider {
         return Jwts.builder()
                 .setClaims(claims)
                 .setIssuedAt(now)
-                .setExpiration(new Date(now.getTime() + exp))
+                .setExpiration(new Date(now.getTime() + EXP))
                 .signWith(secretKey, SignatureAlgorithm.HS256)
                 .compact();
     }
