@@ -77,9 +77,8 @@ public class JwtProvider {
             // Bearer 검증
             if (!token.substring(0, "BEARER ".length()).equalsIgnoreCase("BEARER ")) {
                 return false;
-            } else {
-                token = token.split(" ")[1].trim();
             }
+            token = token.split(" ")[1].trim();
             Jws<Claims> claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token);
             // 만료되었을 시 false
             return !claims.getBody().getExpiration().before(new Date());

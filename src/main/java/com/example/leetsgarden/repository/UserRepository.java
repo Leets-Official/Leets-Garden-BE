@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String name);
-    Long countUserByUsername(String userId);
-
+    Optional<User> findByUsername(String username);
+//    Long countUserByUsername(String userId);
+    Boolean existsUserByUsername(String username);
 }

@@ -25,7 +25,7 @@ public class UserService {
     private final JwtProvider jwtProvider;
 
     public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
-        if (userRepository.countUserByUsername(request.getUsername())==1) {
+        if (userRepository.existsUserByUsername(request.getUsername())) {
             User user = userRepository.findByUsername(request.getUsername()).get();
 
             if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
@@ -68,11 +68,10 @@ public class UserService {
                     .studentNumber(request.getStudentNumber())
                     .build();
             user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
-            if (userRepository.countUserByUsername(user.getUsername())==0){
-                userRepository.save(user);
-            }else{
+            if (userRepository.existsUserByUsername(user.getUsername())){
                 return new ResponseEntity<>(new RegisterResponse(false, "중복된 ID"), HttpStatus.CONFLICT);
             }
+            userRepository.save(user);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             throw e;
@@ -81,7 +80,7 @@ public class UserService {
     }
 
     public ResponseEntity<UserResponse> getUser(String id) throws Exception {
-        if (userRepository.countUserByUsername(id)==1){
+        if (userRepository.existsUserByUsername(id)){
             User user = userRepository.findByUsername(id).get();
             return new ResponseEntity<>(new UserResponse(user, true,"계정 조회 성공"), HttpStatus.OK);
         }else{
