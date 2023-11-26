@@ -1,11 +1,8 @@
 package com.example.leetsgarden.domain;
+
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Getter
@@ -13,36 +10,29 @@ import java.util.List;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class Meeting {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private LocalDateTime dateTime;
+    @Column(nullable = false)
+    private String meetingName;
 
     @Column(nullable = false)
-    private String type;
+    private String meetingPlace;
 
     @Column
-    private String place;
+    private String meetingColor;
 
-    @Column
-    private String content;
-
-    @Column
-    private String color;
-
-    @OneToMany(mappedBy = "meeting")
-    @JsonIgnore
-    private List<Attendance> attendanceList;
+    @Column(nullable = false)
+    private String meetingDay;
 
     public static Meeting from(AddMeetingRequest request) {
         return Meeting.builder()
-                .dateTime(request.getDateTime())
-                .type(request.getType())
-                .place(request.getPlace())
-                .content(request.getContent())
-                .color(request.getColor())
+                .meetingName(request.getMeetingName())
+                .meetingPlace(request.getMeetingPlace())
+                .meetingColor(request.getMeetingColor())
+                .meetingDay(request.getMeetingDay())
                 .build();
     }
 }

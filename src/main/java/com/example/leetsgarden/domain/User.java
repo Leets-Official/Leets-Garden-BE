@@ -29,7 +29,7 @@ public class User {
     @JsonIgnore
     private String name;
 
-    @Column
+    @Column(nullable = false)
     @JsonIgnore
     private String fieldType;
 
