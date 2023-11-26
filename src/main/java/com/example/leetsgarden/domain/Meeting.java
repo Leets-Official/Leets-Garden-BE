@@ -1,5 +1,6 @@
 package com.example.leetsgarden.domain;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,6 +33,7 @@ public class Meeting {
     private String color;
 
     @OneToMany(mappedBy = "meeting")
+    @JsonIgnore
     private List<Attendance> attendanceList;
 
     public static Meeting from(AddMeetingRequest request) {
