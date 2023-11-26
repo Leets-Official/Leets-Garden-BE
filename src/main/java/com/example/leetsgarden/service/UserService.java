@@ -39,10 +39,7 @@ public class UserService {
                     .id(user.getId())
                     .username(user.getUsername())
                     .name(user.getName())
-                    .major(user.getMajor())
-                    .teamType(user.getTeamType())
-                    .studentNumber(user.getStudentNumber())
-                    .attendanceList(user.getAttendanceList())
+                    .fieldType(user.getFieldType())
                     .roles(user.getRoles())
                     .token(jwtProvider.createToken(user.getUsername(), user.getRoles()))
                     .result(true)
@@ -63,9 +60,7 @@ public class UserService {
                     .username(request.getUsername())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .name(request.getName())
-                    .major(request.getMajor())
-                    .teamType(request.getTeamType())
-                    .studentNumber(request.getStudentNumber())
+                    .fieldType(request.getFieldType())
                     .build();
             user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
             if (userRepository.existsUserByUsername(user.getUsername())){

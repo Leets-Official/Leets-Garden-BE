@@ -20,11 +20,8 @@ public class UserResponse {
     private Long id;
     private String username;
     private String name;
-    private String teamType;
-    private String major;
-    private Integer studentNumber;
+    private String fieldType;
     private List<Authority> roles = new ArrayList<>();
-    private List<Attendance> attendanceList = new ArrayList<>();
     private String token;
     private Boolean result;
     private String message;
@@ -33,10 +30,7 @@ public class UserResponse {
         this.id = user.getId();
         this.username = user.getUsername();
         this.name = user.getName();
-        this.teamType = user.getTeamType();
-        this.major = user.getMajor();
-        this.studentNumber = user.getStudentNumber();
-        this.attendanceList = user.getAttendanceList();
+        this.fieldType = user.getFieldType();
         this.roles = user.getRoles();
         this.result = result;
         this.message = message;
