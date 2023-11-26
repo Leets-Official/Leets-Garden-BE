@@ -1,6 +1,7 @@
 package com.example.leetsgarden.domain;
 
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
+import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -34,5 +35,11 @@ public class Meeting {
                 .meetingColor(request.getMeetingColor())
                 .meetingDay(request.getMeetingDay())
                 .build();
+    }
+    public void update(UpdateMeetingRequest request){
+        this.meetingName = request.getMeetingName();
+        this.meetingPlace = request.getMeetingPlace();
+        this.meetingColor = request.getMeetingColor();
+        this.meetingDay = request.getMeetingDay();
     }
 }
