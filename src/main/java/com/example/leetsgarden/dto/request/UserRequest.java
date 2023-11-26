@@ -7,7 +7,7 @@ import lombok.Setter;
 public class UserRequest {
     private Long id;
 
-    private String userid;
+    private String username;
 
     private String password;
 

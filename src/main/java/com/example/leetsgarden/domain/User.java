@@ -19,7 +19,7 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String userId;
+    private String username;
 
     @Column(nullable = false)
     @JsonIgnore

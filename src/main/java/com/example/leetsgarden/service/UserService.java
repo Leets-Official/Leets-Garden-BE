@@ -26,8 +26,8 @@ public class UserService {
 
     public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
         String messsage;
-        if (userRepository.countUserByUserId(request.getUserid())==1){
-            User user = userRepository.findByUserId(request.getUserid()).get();
+        if (userRepository.countUserByUsername(request.getUsername())==1){
+            User user = userRepository.findByUsername(request.getUsername()).get();
 
             if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
                 messsage = "비밀 번호가 틀립니다.";
@@ -40,14 +40,14 @@ public class UserService {
             }
             UserResponse signResponse= UserResponse.builder()
                     .id(user.getId())
-                    .userId(user.getUserId())
+                    .username(user.getUsername())
                     .name(user.getName())
                     .major(user.getMajor())
                     .teamType(user.getTeamType())
                     .studentNumber(user.getStudentNumber())
                     .attendanceList(user.getAttendanceList())
                     .roles(user.getRoles())
-                    .token(jwtProvider.createToken(user.getUserId(), user.getRoles()))
+                    .token(jwtProvider.createToken(user.getUsername(), user.getRoles()))
                     .result(true)
                     .message("로그인 성공")
                     .build();
@@ -65,7 +65,7 @@ public class UserService {
     public ResponseEntity<RegisterResponse> register(UserRequest request) throws Exception {
         try {
             User user = User.builder()
-                    .userId(request.getUserid())
+                    .username(request.getUsername())
                     .password(passwordEncoder.encode(request.getPassword()))
                     .name(request.getName())
                     .major(request.getMajor())
@@ -73,7 +73,7 @@ public class UserService {
                     .studentNumber(request.getStudentNumber())
                     .build();
             user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
-            if (userRepository.countUserByUserId(user.getUserId())==0){
+            if (userRepository.countUserByUsername(user.getUsername())==0){
                 userRepository.save(user);
             }else{
                 return new ResponseEntity<>(new RegisterResponse(false, "중복된 ID"), HttpStatus.CONFLICT);
@@ -86,8 +86,8 @@ public class UserService {
     }
 
     public ResponseEntity<UserResponse> getUser(String id) throws Exception {
-        if (userRepository.countUserByUserId(id)==1){
-            User user = userRepository.findByUserId(id).get();
+        if (userRepository.countUserByUsername(id)==1){
+            User user = userRepository.findByUsername(id).get();
             return new ResponseEntity<>(new UserResponse(user, true,"계정 조회 성공"), HttpStatus.OK);
         }else{
             UserResponse signResponse = UserResponse.builder()

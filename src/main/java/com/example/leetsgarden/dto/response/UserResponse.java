@@ -18,7 +18,7 @@ import java.util.List;
 public class UserResponse {
 
     private Long id;
-    private String userId;
+    private String username;
     private String name;
     private String teamType;
     private String major;
@@ -31,7 +31,7 @@ public class UserResponse {
 
     public UserResponse(User user, Boolean result, String message) {
         this.id = user.getId();
-        this.userId = user.getUserId();
+        this.username = user.getUsername();
         this.name = user.getName();
         this.teamType = user.getTeamType();
         this.major = user.getMajor();
