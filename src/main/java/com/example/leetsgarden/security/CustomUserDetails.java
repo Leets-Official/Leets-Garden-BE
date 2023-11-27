@@ -23,7 +23,7 @@ public class CustomUserDetails implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> authorities = new ArrayList<>();
 
-        for(String role : user.getRoles().value().split(",")){
+        for(String role : user.getRoles().value()){
             authorities.add(new SimpleGrantedAuthority(role));
         }
         return authorities;
