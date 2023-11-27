@@ -34,10 +34,10 @@ public class User {
     @JsonIgnore
     private String fieldType;
 
-//    @Enumerated(EnumType.STRING)
-    private String roles;
+    @Enumerated(EnumType.STRING)
+    private Role roles;
 
-    public void setRoles(String roles) {
+    public void setRoles(Role roles) {
         this.roles = roles;
 //        role.forEach(o -> o.setUser(this));
     }
