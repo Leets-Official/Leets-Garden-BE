@@ -29,16 +29,21 @@ public class Meeting {
     @Column(nullable = false)
     private String meetingDay;
 
-    @OneToMany
-    private List<User> userList;
+    @OneToMany(mappedBy = "meeting", cascade = CascadeType.ALL)
+    private List<UserMeeting> userMeetings;
 
     public static Meeting from(AddMeetingRequest request, List<User> userList) {
-        return Meeting.builder()
+        Meeting meeting = Meeting.builder()
                 .name(request.getMeetingName())
                 .place(request.getMeetingPlace())
                 .meetingDay(request.getMeetingDay())
-                .userList(userList)
                 .build();
+
+        meeting.userMeetings = userList.stream()
+                .map(user -> new UserMeeting(user, meeting))
+                .toList();
+
+        return meeting;
     }
 
     public void update(UpdateMeetingRequest request, UserRepository userRepository){
@@ -47,12 +52,12 @@ public class Meeting {
         this.meetingDay = request.getMeetingDay();
 
         List<String> usernameList = request.getUserList();
-        List<User> updatedUserList = new ArrayList<>();
+        List<UserMeeting> updatedUserMeetings = new ArrayList<>();
 
         for (String username : usernameList) {
             User user = userRepository.findByName(username).orElseThrow(() -> new IllegalArgumentException("해당 유저는 존재하지 않습니다. : " + username));
-            updatedUserList.add(user);
+            updatedUserMeetings.add(new UserMeeting(user, this));
         }
-        this.userList = updatedUserList;
+        this.userMeetings = updatedUserMeetings;
     }
 }

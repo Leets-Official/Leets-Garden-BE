@@ -23,11 +23,11 @@ public class Attendance {
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "userMeeting_id")
-    private UserMeeting userMeeting;
+    @JoinColumn(name = "weeklyMeetings_id")
+    private WeeklyMeetings weeklyMeetings;
 
-    public Attendance(User user, UserMeeting userMeeting) {
-        this.user = user;
-        this.userMeeting = userMeeting;
+    public Attendance(UserMeeting userMeeting, WeeklyMeetings weeklyMeetings) {
+        this.user = userMeeting.getUser();
+        this.weeklyMeetings = weeklyMeetings;
     }
 }

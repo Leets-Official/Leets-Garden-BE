@@ -1,35 +1,33 @@
 package com.example.leetsgarden.domain;
 
-import com.example.leetsgarden.dto.request.AddUserMeetingRequest;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
-
-import java.time.LocalDate;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
 public class UserMeeting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private LocalDate meetingDate;
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    private User user;
 
-    @Column
-    private String content;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "meeting_id")
+    @JsonIgnore
     private Meeting meeting;
 
-    public UserMeeting(AddUserMeetingRequest request, Meeting savedMeeting) {
-        this.meetingDate = request.getMeetingDate();
-        this.content = request.getContent();
-        this.meeting = savedMeeting;
+    public UserMeeting(User user, Meeting meeting) {
+        this.user = user;
+        this.meeting = meeting;
     }
 }
