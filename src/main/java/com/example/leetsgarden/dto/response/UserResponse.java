@@ -1,15 +1,11 @@
 package com.example.leetsgarden.dto.response;
 
-import com.example.leetsgarden.domain.Attendance;
-import com.example.leetsgarden.domain.Authority;
 import com.example.leetsgarden.domain.User;
+import com.example.leetsgarden.domain.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @Builder
@@ -21,7 +17,7 @@ public class UserResponse {
     private String username;
     private String name;
     private String fieldType;
-    private List<Authority> roles = new ArrayList<>();
+    private Role roles;
     private String token;
     private Boolean result;
     private String message;

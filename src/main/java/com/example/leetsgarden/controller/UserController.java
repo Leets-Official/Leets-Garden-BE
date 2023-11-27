@@ -23,7 +23,7 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<UserResponse> getUser(@RequestParam String id) throws Exception {
-        return userService.getUser(id);
+    public ResponseEntity<UserResponse> getUser(@RequestParam String username) throws Exception {
+        return userService.getUser(username);
     }
 }

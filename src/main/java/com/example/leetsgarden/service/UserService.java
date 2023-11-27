@@ -1,7 +1,7 @@
 package com.example.leetsgarden.service;
 
-import com.example.leetsgarden.domain.Authority;
 import com.example.leetsgarden.domain.User;
+import com.example.leetsgarden.domain.Role;
 import com.example.leetsgarden.dto.request.UserRequest;
 import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
@@ -13,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Collections;
 
 @Service
 @Transactional
@@ -62,7 +60,7 @@ public class UserService {
                     .name(request.getName())
                     .fieldType(request.getFieldType())
                     .build();
-            user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
+            user.setRoles(Role.valueOf("USER"));
             if (userRepository.existsUserByUsername(user.getUsername())){
                 return new ResponseEntity<>(new RegisterResponse(false, "중복된 ID"), HttpStatus.CONFLICT);
             }

@@ -1,6 +1,6 @@
 package com.example.leetsgarden.security;
 
-import com.example.leetsgarden.domain.Authority;
+import com.example.leetsgarden.domain.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Date;
-import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -43,7 +42,7 @@ public class JwtProvider {
     }
 
     // 토큰 생성
-    public String createToken(String userid, List<Authority> roles) {
+    public String createToken(String userid, Role roles) {
         Claims claims = Jwts.claims().setSubject(userid);
         claims.put("roles", roles);
         Date now = new Date();
