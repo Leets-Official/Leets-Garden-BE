@@ -1,11 +1,7 @@
 package com.example.leetsgarden.domain;
-import com.example.leetsgarden.dto.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Builder
@@ -39,7 +35,6 @@ public class User {
 
     public void setRoles(Role roles) {
         this.roles = roles;
-//        role.forEach(o -> o.setUser(this));
     }
 }
 

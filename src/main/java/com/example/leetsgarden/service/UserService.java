@@ -1,7 +1,7 @@
 package com.example.leetsgarden.service;
 
 import com.example.leetsgarden.domain.User;
-import com.example.leetsgarden.dto.Role;
+import com.example.leetsgarden.domain.Role;
 import com.example.leetsgarden.dto.request.UserRequest;
 import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
