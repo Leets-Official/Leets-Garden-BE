@@ -3,9 +3,7 @@ package com.example.leetsgarden.domain;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
+import java.util.*;
 
 public enum Role {
     MASTER("ROLE_MASTER,ROLE_ADMIN,ROLE_USER"),
@@ -15,7 +13,8 @@ public enum Role {
     Role(String role) {
         this.role = role;
     }
-    public ArrayList<String> value() {
-        return new ArrayList<>(Arrays.asList(this.role.split(",")));
+    public List<String> value() {
+        return Collections.unmodifiableList(Arrays.asList(this.role.split(",")));
+
     }
 }
