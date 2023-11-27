@@ -1,4 +1,5 @@
 package com.example.leetsgarden.domain;
+import com.example.leetsgarden.dto.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,14 +34,12 @@ public class User {
     @JsonIgnore
     private String fieldType;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @Builder.Default
-    @JsonIgnore
-    private List<Authority> roles = new ArrayList<>();
+//    @Enumerated(EnumType.STRING)
+    private String roles;
 
-    public void setRoles(List<Authority> role) {
-        this.roles = role;
-        role.forEach(o -> o.setUser(this));
+    public void setRoles(String roles) {
+        this.roles = roles;
+//        role.forEach(o -> o.setUser(this));
     }
 }
 

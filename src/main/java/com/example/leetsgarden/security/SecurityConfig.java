@@ -47,11 +47,12 @@ public class SecurityConfig {
                 )
                 .authorizeHttpRequests((authorizeRequests) ->
                         authorizeRequests
-                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+//                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                                 .requestMatchers("/login").permitAll()
                                 .requestMatchers("/register").permitAll()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
+//                                .requestMatchers(HttpMethod.GET,"/user/**").hasRole("USER")
                                 .anyRequest().permitAll()
                 )
                 .addFilterBefore(new CustomCorsFilter(), CorsFilter.class)

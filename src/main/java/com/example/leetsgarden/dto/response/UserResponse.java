@@ -21,7 +21,7 @@ public class UserResponse {
     private String username;
     private String name;
     private String fieldType;
-    private List<Authority> roles = new ArrayList<>();
+    private String roles;
     private String token;
     private Boolean result;
     private String message;

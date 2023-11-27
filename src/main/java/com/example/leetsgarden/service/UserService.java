@@ -62,7 +62,7 @@ public class UserService {
                     .name(request.getName())
                     .fieldType(request.getFieldType())
                     .build();
-            user.setRoles(Collections.singletonList(Authority.builder().name("ROLE_USER").build()));
+            user.setRoles("ROLE_USER");
             if (userRepository.existsUserByUsername(user.getUsername())){
                 return new ResponseEntity<>(new RegisterResponse(false, "중복된 ID"), HttpStatus.CONFLICT);
             }
