@@ -3,25 +3,16 @@ package com.example.leetsgarden.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
-@Getter
 @Builder
+@Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-public class Attendance {
+public class UserMeeting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private LocalDate attDate;
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private AttendanceType attType;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
