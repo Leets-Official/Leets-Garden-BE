@@ -14,8 +14,6 @@ public class MeetingResponse {
 
     private String meetingPlace;
 
-    private String meetingColor;
-
     private String meetingDay;
 
     public static MeetingResponse from(Meeting meeting) {
@@ -23,7 +21,6 @@ public class MeetingResponse {
                 .id(meeting.getId())
                 .meetingName(meeting.getName())
                 .meetingPlace(meeting.getPlace())
-                .meetingColor(meeting.getColor())
                 .meetingDay(meeting.getMeetingDay())
                 .build();
     }

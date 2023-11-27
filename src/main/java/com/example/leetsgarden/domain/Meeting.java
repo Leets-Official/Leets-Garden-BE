@@ -22,9 +22,6 @@ public class Meeting {
     @Column(nullable = false)
     private String place;
 
-    @Column
-    private String color;
-
     @Column(nullable = false)
     private String meetingDay;
 
@@ -32,14 +29,12 @@ public class Meeting {
         return Meeting.builder()
                 .name(request.getMeetingName())
                 .place(request.getMeetingPlace())
-                .color(request.getMeetingColor())
                 .meetingDay(request.getMeetingDay())
                 .build();
     }
     public void update(UpdateMeetingRequest request){
         this.name = request.getMeetingName();
         this.place = request.getMeetingPlace();
-        this.color = request.getMeetingColor();
         this.meetingDay = request.getMeetingDay();
     }
 }

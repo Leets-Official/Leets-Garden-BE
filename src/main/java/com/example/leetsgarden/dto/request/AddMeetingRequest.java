@@ -9,7 +9,5 @@ public class AddMeetingRequest {
 
     private String meetingPlace;
 
-    private String meetingColor;
-
     private String meetingDay;
 }

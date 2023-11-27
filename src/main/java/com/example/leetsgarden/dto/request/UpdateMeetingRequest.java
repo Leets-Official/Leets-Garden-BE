@@ -8,7 +8,5 @@ public class UpdateMeetingRequest {
 
     private String meetingPlace;
 
-    private String meetingColor;
-
     private String meetingDay;
 }
