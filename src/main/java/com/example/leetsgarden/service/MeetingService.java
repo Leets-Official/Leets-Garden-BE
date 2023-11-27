@@ -8,6 +8,7 @@ import com.example.leetsgarden.repository.MeetingRepository;
 import com.example.leetsgarden.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -22,17 +23,15 @@ public class MeetingService {
 
     public Meeting save(AddMeetingRequest request) {
         List<String> users = request.getUserList();
-        List<User> all = userRepository.findAll();
-
         List<User> attendanceUserList = new ArrayList<>();
+
         for (String name : users) {
-            User user = all.stream()
-                    .filter(u -> u.getName().equals(name))
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다: " + name));
+            User user = userRepository.findByName(name)
+                    .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다: " + name));
 
             attendanceUserList.add(user);
         }
+
         Meeting meeting = Meeting.from(request, attendanceUserList);
         return meetingRepository.save(meeting);
     }
