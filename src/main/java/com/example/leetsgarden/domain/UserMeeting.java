@@ -1,7 +1,10 @@
 package com.example.leetsgarden.domain;
 
+import com.example.leetsgarden.dto.request.AddUserMeetingRequest;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Builder
@@ -14,12 +17,19 @@ public class UserMeeting {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    @Column
+    private LocalDate meetingDate;
+
+    @Column
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "meeting_id")
     private Meeting meeting;
 
+    public UserMeeting(AddUserMeetingRequest request, Meeting savedMeeting) {
+        this.meetingDate = request.getMeetingDate();
+        this.content = request.getContent();
+        this.meeting = savedMeeting;
+    }
 }

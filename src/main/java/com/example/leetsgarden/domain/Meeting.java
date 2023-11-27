@@ -2,8 +2,12 @@ package com.example.leetsgarden.domain;
 
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.repository.UserRepository;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -25,16 +29,30 @@ public class Meeting {
     @Column(nullable = false)
     private String meetingDay;
 
-    public static Meeting from(AddMeetingRequest request) {
+    @OneToMany
+    private List<User> userList;
+
+    public static Meeting from(AddMeetingRequest request, List<User> userList) {
         return Meeting.builder()
                 .name(request.getMeetingName())
                 .place(request.getMeetingPlace())
                 .meetingDay(request.getMeetingDay())
+                .userList(userList)
                 .build();
     }
-    public void update(UpdateMeetingRequest request){
+
+    public void update(UpdateMeetingRequest request, UserRepository userRepository){
         this.name = request.getMeetingName();
         this.place = request.getMeetingPlace();
         this.meetingDay = request.getMeetingDay();
+
+        List<String> usernameList = request.getUserList();
+        List<User> updatedUserList = new ArrayList<>();
+
+        for (String username : usernameList) {
+            User user = userRepository.findByName(username).orElseThrow(() -> new IllegalArgumentException("해당 유저는 존재하지 않습니다. : " + username));
+            updatedUserList.add(user);
+        }
+        this.userList = updatedUserList;
     }
 }
