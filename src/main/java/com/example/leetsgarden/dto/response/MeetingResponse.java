@@ -21,9 +21,9 @@ public class MeetingResponse {
     public static MeetingResponse from(Meeting meeting) {
         return MeetingResponse.builder()
                 .id(meeting.getId())
-                .meetingName(meeting.getMeetingName())
-                .meetingPlace(meeting.getMeetingPlace())
-                .meetingColor(meeting.getMeetingColor())
+                .meetingName(meeting.getName())
+                .meetingPlace(meeting.getPlace())
+                .meetingColor(meeting.getColor())
                 .meetingDay(meeting.getMeetingDay())
                 .build();
     }

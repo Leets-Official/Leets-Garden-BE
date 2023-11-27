@@ -17,29 +17,29 @@ public class Meeting {
     private Long id;
 
     @Column(nullable = false)
-    private String meetingName;
+    private String name;
 
     @Column(nullable = false)
-    private String meetingPlace;
+    private String place;
 
     @Column
-    private String meetingColor;
+    private String color;
 
     @Column(nullable = false)
     private String meetingDay;
 
     public static Meeting from(AddMeetingRequest request) {
         return Meeting.builder()
-                .meetingName(request.getMeetingName())
-                .meetingPlace(request.getMeetingPlace())
-                .meetingColor(request.getMeetingColor())
+                .name(request.getMeetingName())
+                .place(request.getMeetingPlace())
+                .color(request.getMeetingColor())
                 .meetingDay(request.getMeetingDay())
                 .build();
     }
     public void update(UpdateMeetingRequest request){
-        this.meetingName = request.getMeetingName();
-        this.meetingPlace = request.getMeetingPlace();
-        this.meetingColor = request.getMeetingColor();
+        this.name = request.getMeetingName();
+        this.place = request.getMeetingPlace();
+        this.color = request.getMeetingColor();
         this.meetingDay = request.getMeetingDay();
     }
 }
