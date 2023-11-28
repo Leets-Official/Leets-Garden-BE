@@ -3,13 +3,11 @@ package com.example.leetsgarden.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDate;
-
 @Entity
 @Getter
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Attendance {
 
     @Id
@@ -17,18 +15,19 @@ public class Attendance {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDate attDate;
-
-    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private AttendanceType attType;
+    private AttendanceType attType = AttendanceType.ABSENCE;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "meeting_id")
-    private Meeting meeting;
+    @JoinColumn(name = "weeklyMeetings_id")
+    private WeeklyMeetings weeklyMeetings;
 
+    public Attendance(UserMeeting userMeeting, WeeklyMeetings weeklyMeetings) {
+        this.user = userMeeting.getUser();
+        this.weeklyMeetings = weeklyMeetings;
+    }
 }

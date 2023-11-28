@@ -1,9 +1,8 @@
 package com.example.leetsgarden.domain;
 
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public enum Role {
     MASTER("ROLE_MASTER,ROLE_ADMIN,ROLE_USER"),

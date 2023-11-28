@@ -3,6 +3,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Builder
 @Getter
@@ -32,6 +34,9 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private Role roles;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<UserMeeting> userMeetings;
 
     public void setRoles(Role roles) {
         this.roles = roles;

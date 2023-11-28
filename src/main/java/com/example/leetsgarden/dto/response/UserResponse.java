@@ -1,7 +1,7 @@
 package com.example.leetsgarden.dto.response;
 
-import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.domain.Role;
+import com.example.leetsgarden.domain.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
