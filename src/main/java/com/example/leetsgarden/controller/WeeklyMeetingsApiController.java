@@ -26,11 +26,7 @@ public class WeeklyMeetingsApiController {
 
     @GetMapping
     public ResponseEntity<List<WeeklyMeetingsResponse>> findAll(){
-        List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findAll()
-                .stream()
-                .map(WeeklyMeetingsResponse::new)
-                .toList();
-
+        List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findAll();
         return ResponseEntity.ok().body(weeklyMeetingsResponse);
     }
 }
