@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/meeting")
+@RequestMapping("/meetings")
 @RequiredArgsConstructor
 public class WeeklyMeetingsApiController {
 
     private final WeeklyMeetingsService weeklyMeetingsService;
 
-    @PostMapping("/{meetingId}")
-    public ResponseEntity<WeeklyMeetingsResponse> save(@PathVariable Long meetingId, @RequestBody AddWeeklyMeetingsRequest request) {
-        WeeklyMeetings weeklyMeetings = weeklyMeetingsService.save(meetingId, request);
+    @PostMapping
+    public ResponseEntity<WeeklyMeetingsResponse> save(@RequestBody AddWeeklyMeetingsRequest request) {
+        WeeklyMeetings weeklyMeetings = weeklyMeetingsService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(new WeeklyMeetingsResponse(weeklyMeetings));
     }
 
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<WeeklyMeetingsResponse>> findAll(){
         List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findAll()
                 .stream()

@@ -22,8 +22,8 @@ public class WeeklyMeetingsService {
     private final AttendanceRepository attendanceRepository;
 
     @Transactional
-    public WeeklyMeetings save(Long meetingId, AddWeeklyMeetingsRequest request) {
-        Meeting savedMeeting = meetingRepository.findById(meetingId).orElseThrow(() -> new IllegalArgumentException("모임이 존재하지 않습니다."));
+    public WeeklyMeetings save(AddWeeklyMeetingsRequest request) {
+        Meeting savedMeeting = meetingRepository.findById(request.getMeetingId()).orElseThrow(() -> new IllegalArgumentException("모임이 존재하지 않습니다."));
 
         WeeklyMeetings weeklyMeetings = new WeeklyMeetings(request, savedMeeting);
         weeklyMeetingsRepository.save(weeklyMeetings);
