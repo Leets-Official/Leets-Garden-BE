@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/meetings")
+@RequestMapping("/meeting-weekly")
 @RequiredArgsConstructor
 public class WeeklyMeetingsApiController {
 
@@ -31,7 +31,7 @@ public class WeeklyMeetingsApiController {
         return ResponseEntity.ok().body(weeklyMeetingsResponse);
     }
 
-    @GetMapping("/{meetingId}/attendance-details")
+    @GetMapping("/all/{meetingId}")
     public ResponseEntity<List<UserAttendanceDetailsResponse>> getAttendanceDetailsByMeetingId(@PathVariable Long meetingId) {
         List<UserAttendanceDetailsResponse> responseList = weeklyMeetingsService.getAttendanceDetailsByMeetingId(meetingId);
         return ResponseEntity.ok(responseList);
