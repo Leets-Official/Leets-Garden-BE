@@ -30,4 +30,7 @@ public class Attendance {
         this.user = userMeeting.getUser();
         this.weeklyMeetings = weeklyMeetings;
     }
+    public void setAttType(AttendanceType attType) {
+        this.attType = attType;
+    }
 }

@@ -14,6 +14,5 @@ public enum Role {
     }
     public List<String> value() {
         return Collections.unmodifiableList(Arrays.asList(this.role.split(",")));
-
     }
 }

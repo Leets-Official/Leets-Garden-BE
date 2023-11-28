@@ -21,7 +21,6 @@ public class UserController {
     public ResponseEntity<RegisterResponse> signup(@RequestBody UserRequest request) throws Exception {
         return userService.register(request);
     }
-
     @GetMapping("/user")
     public ResponseEntity<UserResponse> getUser(@RequestParam String username) throws Exception {
         return userService.getUser(username);

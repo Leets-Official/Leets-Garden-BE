@@ -2,6 +2,7 @@ package com.example.leetsgarden.controller;
 
 import com.example.leetsgarden.domain.WeeklyMeetings;
 import com.example.leetsgarden.dto.request.AddWeeklyMeetingsRequest;
+import com.example.leetsgarden.dto.response.UserAttendanceDetailsResponse;
 import com.example.leetsgarden.dto.response.WeeklyMeetingsResponse;
 import com.example.leetsgarden.service.WeeklyMeetingsService;
 import lombok.RequiredArgsConstructor;
@@ -29,4 +30,11 @@ public class WeeklyMeetingsApiController {
         List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findAll();
         return ResponseEntity.ok().body(weeklyMeetingsResponse);
     }
+
+    @GetMapping("/{meetingId}/attendance-details")
+    public ResponseEntity<List<UserAttendanceDetailsResponse>> getAttendanceDetailsByMeetingId(@PathVariable Long meetingId) {
+        List<UserAttendanceDetailsResponse> responseList = weeklyMeetingsService.getAttendanceDetailsByMeetingId(meetingId);
+        return ResponseEntity.ok(responseList);
+    }
+
 }
