@@ -19,7 +19,7 @@ public class AttendanceService {
     @Transactional
     public AttendanceResponse updateAttendance(Long attendanceId, AddAttendanceRequest request) {
         Attendance attendance = attendanceRepository.findById(attendanceId)
-                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 출석 기록을 찾을 수 없습니다: " + attendanceId));
+                .orElseThrow(() -> new IllegalArgumentException("해당 ID의 출석기록이 없습니다 : " + attendanceId));
 
         try {
 
@@ -27,7 +27,7 @@ public class AttendanceService {
             attendance.setAttType(newAttendanceType);
         } catch (IllegalArgumentException e) {
 
-            throw new IllegalArgumentException("유효하지 않은 출석 유형입니다: " + request.getNewAttendanceType());
+            throw new IllegalArgumentException("사용할 수 없는 출석 유형입니다: " + request.getNewAttendanceType());
         }
 
         Attendance updatedAttendance = attendanceRepository.save(attendance);
