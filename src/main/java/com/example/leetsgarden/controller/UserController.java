@@ -19,13 +19,8 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<RegisterResponse> signup(@RequestBody UserRequest request) {
-        try {
-            return userService.register(request);
-        } catch (Exception e) {
-            return new ResponseEntity<>(new RegisterResponse(
-                    false, "올바르지 않은 권한"), HttpStatus.NOT_ACCEPTABLE);
-        }
+    public ResponseEntity<RegisterResponse> signup(@RequestBody UserRequest request) throws Exception {
+        return userService.register(request);
     }
 
     @GetMapping("/user")
