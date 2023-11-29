@@ -1,6 +1,7 @@
 package com.example.leetsgarden.controller;
 
 import com.example.leetsgarden.dto.request.AddUserRequest;
+import com.example.leetsgarden.dto.request.LoginUserRequest;
 import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.service.UserService;
@@ -15,7 +16,7 @@ public class UserController {
     private final UserService userService;
     @Operation(summary = "로그인", description = "학번과 생일로 로그인가능합니다. ", tags = {"UserController"})
     @PostMapping(value = "/login")
-    public ResponseEntity<UserResponse> signin(@RequestBody AddUserRequest request) throws Exception {
+    public ResponseEntity<UserResponse> signin(@RequestBody LoginUserRequest request) throws Exception {
         return userService.login(request);
     }
 
