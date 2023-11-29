@@ -5,6 +5,7 @@ import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,13 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<RegisterResponse> signup(@RequestBody UserRequest request) throws Exception {
-        return userService.register(request);
+    public ResponseEntity<RegisterResponse> signup(@RequestBody UserRequest request) {
+        try {
+            return userService.register(request);
+        } catch (Exception e) {
+            return new ResponseEntity<>(new RegisterResponse(
+                    false, "올바르지 않은 권한"), HttpStatus.NOT_ACCEPTABLE);
+        }
     }
 
     @GetMapping("/user")

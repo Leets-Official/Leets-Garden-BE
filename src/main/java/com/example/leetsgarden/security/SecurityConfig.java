@@ -49,7 +49,7 @@ public class SecurityConfig {
 //                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 //                                .requestMatchers(HttpMethod.GET,"/user/**").hasRole("USER")
                                 .requestMatchers("/login").permitAll()
-                                .requestMatchers("/register").permitAll()
+                                .requestMatchers("/register").hasRole("ADMIN")
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .anyRequest().permitAll()
