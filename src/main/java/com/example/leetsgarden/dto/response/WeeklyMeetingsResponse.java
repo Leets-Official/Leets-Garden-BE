@@ -18,5 +18,6 @@ public class WeeklyMeetingsResponse {
         this.meetingDate = weeklyMeetings.getMeetingDate();
         this.content = weeklyMeetings.getContent();
         this.meetingResponse = MeetingResponse.from(weeklyMeetings.getMeeting());
+
     }
 }

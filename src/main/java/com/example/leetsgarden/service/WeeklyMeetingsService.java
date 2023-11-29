@@ -5,6 +5,8 @@ import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.UserMeeting;
 import com.example.leetsgarden.domain.WeeklyMeetings;
 import com.example.leetsgarden.dto.request.AddWeeklyMeetingsRequest;
+import com.example.leetsgarden.dto.response.AttendanceDetailsResponse;
+import com.example.leetsgarden.dto.response.UserAttendanceDetailsResponse;
 import com.example.leetsgarden.dto.response.WeeklyMeetingsResponse;
 import com.example.leetsgarden.repository.AttendanceRepository;
 import com.example.leetsgarden.repository.MeetingRepository;
@@ -15,6 +17,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -49,4 +53,15 @@ public class WeeklyMeetingsService {
                 .map(WeeklyMeetingsResponse::new)
                 .toList();
     }
+
+    public List<UserAttendanceDetailsResponse> getAttendanceDetailsByMeetingId(Long meetingId) {
+        List<Attendance> attendanceList = attendanceRepository.findByWeeklyMeetings_Meeting_Id(meetingId);
+
+        return attendanceList.stream()
+                .collect(Collectors.groupingBy(att -> att.getUser().getId(),
+                     Collectors.mapping(AttendanceDetailsResponse::from, Collectors.toList())))
+                .entrySet().stream()
+                .map(entry -> new UserAttendanceDetailsResponse(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+}
 }
