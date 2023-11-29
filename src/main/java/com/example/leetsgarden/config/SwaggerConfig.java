@@ -1,4 +1,4 @@
-package com.example.leetsgarden;
+package com.example.leetsgarden.config;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
