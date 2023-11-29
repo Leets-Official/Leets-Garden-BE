@@ -2,7 +2,7 @@ package com.example.leetsgarden.service;
 
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.domain.Role;
-import com.example.leetsgarden.dto.request.UserRequest;
+import com.example.leetsgarden.dto.request.AddUserRequest;
 import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.repository.UserRepository;
@@ -22,7 +22,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    public ResponseEntity<UserResponse> login(UserRequest request) throws Exception {
+    public ResponseEntity<UserResponse> login(AddUserRequest request) throws Exception {
         if (userRepository.existsUserByUsername(request.getUsername())) {
             User user = userRepository.findByUsername(request.getUsername()).get();
 
@@ -52,7 +52,7 @@ public class UserService {
         return new ResponseEntity<>(signResponse, HttpStatus.NOT_FOUND);
     }
 
-    public ResponseEntity<RegisterResponse> register(UserRequest request) throws Exception {
+    public ResponseEntity<RegisterResponse> register(AddUserRequest request) throws Exception {
         try {
             User user = User.builder()
                     .username(request.getUsername())

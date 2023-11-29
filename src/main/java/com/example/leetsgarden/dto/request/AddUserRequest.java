@@ -1,11 +1,9 @@
 package com.example.leetsgarden.dto.request;
 
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-public class UserRequest {
-    private Long id;
+public class AddUserRequest {
 
     private String username;
 
