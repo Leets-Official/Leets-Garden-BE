@@ -6,6 +6,7 @@ import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
