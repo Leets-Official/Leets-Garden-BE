@@ -55,7 +55,6 @@ public class SecurityConfig {
                                 .requestMatchers("/user/**").hasRole("USER")
                                 .anyRequest().permitAll()
                 )
-                .addFilterBefore(new CustomCorsFilter(), CorsFilter.class)
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exceptionConfig) ->
                         exceptionConfig
