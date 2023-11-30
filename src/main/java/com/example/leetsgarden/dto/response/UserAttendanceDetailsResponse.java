@@ -9,10 +9,12 @@ import java.util.List;
 @Setter
 public class UserAttendanceDetailsResponse {
     private Long userId;
+    private String username;
     private List<AttendanceDetailsResponse> attendanceDetailsList;
 
-    public UserAttendanceDetailsResponse(Long userId, List<AttendanceDetailsResponse> attendanceDetailsList) {
+    public UserAttendanceDetailsResponse(Long userId, String username, List<AttendanceDetailsResponse> attendanceDetailsList) {
         this.userId = userId;
+        this.username = username;
         this.attendanceDetailsList = attendanceDetailsList;
     }
 }

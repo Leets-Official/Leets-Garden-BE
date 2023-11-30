@@ -73,7 +73,7 @@ public class WeeklyMeetingsService {
                 .collect(Collectors.groupingBy(att -> att.getUser().getId(),
                      Collectors.mapping(AttendanceDetailsResponse::from, Collectors.toList())))
                 .entrySet().stream()
-                .map(entry -> new UserAttendanceDetailsResponse(entry.getKey(), entry.getValue()))
+                .map(entry -> new UserAttendanceDetailsResponse(entry.getKey(), userRepository.findById(entry.getKey()).get().getUsername(), entry.getValue()))
                 .collect(Collectors.toList());
 }
 }
