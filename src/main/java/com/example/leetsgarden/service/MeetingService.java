@@ -44,20 +44,6 @@ public class MeetingService {
         return meetingRepository.findById(id).orElseThrow(IllegalArgumentException::new);
     }
 
-//    public List<WeeklyMeetingsResponse> findUserTodayAll(String userName) {
-//        User user = userRepository.findByUsername(userName).get();
-//        LocalDate now = LocalDate.now();
-//        List<WeeklyMeetings> weeklyMeetingsList = weeklyMeetingsRepository.findAllByMeetingDate(now);
-//
-//        return weeklyMeetingsList.stream()
-//                .filter(s -> s.getMeeting().getUserMeetings()
-//                        .stream()
-//                        .anyMatch(userMeeting -> userMeeting.getUser().equals(user)))
-//                .map(WeeklyMeetingsResponse::new)
-//                .toList();
-//    }
-
-
     public List<MeetingResponse> findByUserAll(String userName) {
         User user = userRepository.findByUsername(userName).get();
         List<Meeting> MeetingList = meetingRepository.findAll();

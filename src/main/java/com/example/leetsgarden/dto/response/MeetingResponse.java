@@ -23,13 +23,6 @@ public class MeetingResponse {
 
     private List<User> userList;
 
-//    public MeetingResponse(MeetingResponse Meeting){
-//        this.id = Meeting.getId();
-//        this.meetingName = Meeting.getMeetingName();
-//        this.meetingDay = Meeting.getMeetingDay();
-//        this.userList = Meeting.getUserList();
-//    }
-
     public static MeetingResponse from(Meeting meeting) {
         MeetingResponse meetingResponse = MeetingResponse.builder()
                 .id(meeting.getId())
