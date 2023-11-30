@@ -3,7 +3,6 @@ package com.example.leetsgarden.dto.response;
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.domain.UserMeeting;
-import com.example.leetsgarden.domain.WeeklyMeetings;
 import lombok.Builder;
 import lombok.Getter;
 

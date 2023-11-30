@@ -2,11 +2,9 @@ package com.example.leetsgarden.service;
 
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
-import com.example.leetsgarden.domain.WeeklyMeetings;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
 import com.example.leetsgarden.dto.response.MeetingResponse;
-import com.example.leetsgarden.dto.response.WeeklyMeetingsResponse;
 import com.example.leetsgarden.repository.MeetingRepository;
 import com.example.leetsgarden.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -14,7 +12,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
