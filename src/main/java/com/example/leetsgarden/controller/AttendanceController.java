@@ -6,13 +6,12 @@ import com.example.leetsgarden.service.AttendanceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "attendance", description = "출석 API")
+
 @RestController
 @RequestMapping("/attendance")
 @RequiredArgsConstructor
@@ -25,9 +24,9 @@ public class AttendanceController {
         return attendanceService.updateAttendance(id, request);
     }
     @Operation(summary = "출석체크조회", description = "출석 테이블을 기준으로 출석 정보를 확인합니다.", tags = {"AttendanceController"})
-    @GetMapping("/meeting/{meetingId}")
-    public ResponseEntity<List<AttendanceResponse>> getAttendancesByMeetingId(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long meetingId) {
-        List<AttendanceResponse> attendances = attendanceService.getAttendancesByMeetingId(meetingId);
+    @GetMapping("/meeting/{id}")
+    public ResponseEntity<List<AttendanceResponse>> getAttendancesByMeetingId(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long id) {
+        List<AttendanceResponse> attendances = attendanceService.getAttendancesByMeetingId(id);
         return ResponseEntity.ok().body(attendances);
     }
 }

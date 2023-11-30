@@ -8,7 +8,6 @@ import com.example.leetsgarden.service.WeeklyMeetingsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-@Tag(name = "meeting-weekly", description = "주 별 모임 API")
+
 @RestController
 @RequestMapping("/meeting-weekly")
 @RequiredArgsConstructor
@@ -45,9 +44,9 @@ public class WeeklyMeetingsApiController {
     }
 
     @Operation(summary = "전체 잔디밭 조회", description = "동일한 모임을 기준으로 각각의 유저의 출석여부와 날짜를 조회합니다. ", tags = {"WeeklyMeetingsApiController"})
-    @GetMapping("/all/{meetingId}")
-    public ResponseEntity<List<UserAttendanceDetailsResponse>> getAttendanceDetailsByMeetingId(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long meetingId) {
-        List<UserAttendanceDetailsResponse> responseList = weeklyMeetingsService.getAttendanceDetailsByMeetingId(meetingId);
+    @GetMapping("/all/{id}")
+    public ResponseEntity<List<UserAttendanceDetailsResponse>> getAttendanceDetailsByMeetingId(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long id) {
+        List<UserAttendanceDetailsResponse> responseList = weeklyMeetingsService.getAttendanceDetailsByMeetingId(id);
         return ResponseEntity.ok(responseList);
     }
 
