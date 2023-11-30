@@ -1,15 +1,13 @@
 package com.example.leetsgarden.service;
 
-import com.example.leetsgarden.domain.Attendance;
-import com.example.leetsgarden.domain.Meeting;
-import com.example.leetsgarden.domain.UserMeeting;
-import com.example.leetsgarden.domain.WeeklyMeetings;
+import com.example.leetsgarden.domain.*;
 import com.example.leetsgarden.dto.request.AddWeeklyMeetingsRequest;
 import com.example.leetsgarden.dto.response.AttendanceDetailsResponse;
 import com.example.leetsgarden.dto.response.UserAttendanceDetailsResponse;
 import com.example.leetsgarden.dto.response.WeeklyMeetingsResponse;
 import com.example.leetsgarden.repository.AttendanceRepository;
 import com.example.leetsgarden.repository.MeetingRepository;
+import com.example.leetsgarden.repository.UserRepository;
 import com.example.leetsgarden.repository.WeeklyMeetingsRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +25,7 @@ public class WeeklyMeetingsService {
     private final WeeklyMeetingsRepository weeklyMeetingsRepository;
     private final MeetingRepository meetingRepository;
     private final AttendanceRepository attendanceRepository;
+    private final UserRepository userRepository;
 
     @Transactional
     public WeeklyMeetings save(AddWeeklyMeetingsRequest request) {
@@ -50,6 +49,19 @@ public class WeeklyMeetingsService {
 
         return weeklyMeetingsList.stream()
                 .filter(s -> !s.getMeetingDate().isBefore(now))
+                .map(WeeklyMeetingsResponse::new)
+                .toList();
+    }
+
+    public List<WeeklyMeetingsResponse> findUserTodayAll(String userName) {
+        User user = userRepository.findByUsername(userName).get();
+        LocalDate now = LocalDate.now();
+        List<WeeklyMeetings> weeklyMeetingsList = weeklyMeetingsRepository.findAllByMeetingDate(now);
+
+        return weeklyMeetingsList.stream()
+                .filter(s -> s.getMeeting().getUserMeetings()
+                        .stream()
+                        .anyMatch(userMeeting -> userMeeting.getUser().equals(user)))
                 .map(WeeklyMeetingsResponse::new)
                 .toList();
     }

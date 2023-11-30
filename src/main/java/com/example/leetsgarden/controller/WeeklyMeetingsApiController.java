@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,14 @@ public class WeeklyMeetingsApiController {
         List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findAll();
         return ResponseEntity.ok().body(weeklyMeetingsResponse);
     }
+
+    @Operation(summary = "유저의 오늘 진행되는 모임조회", description = "유저의 오늘 진행하는 모임의 정보를 조회합니다. ", tags = {"WeeklyMeetingsApiController"})
+    @GetMapping("/today")
+    public ResponseEntity<List<WeeklyMeetingsResponse>> findUserTodayAll(Authentication authentication){
+        List<WeeklyMeetingsResponse> weeklyMeetingsResponse = weeklyMeetingsService.findUserTodayAll(authentication.getName());
+        return ResponseEntity.ok().body(weeklyMeetingsResponse);
+    }
+
     @Operation(summary = "전체 잔디밭 조회", description = "동일한 모임을 기준으로 각각의 유저의 출석여부와 날짜를 조회합니다. ", tags = {"WeeklyMeetingsApiController"})
     @GetMapping("/all/{meetingId}")
     public ResponseEntity<List<UserAttendanceDetailsResponse>> getAttendanceDetailsByMeetingId(@PathVariable Long meetingId) {
