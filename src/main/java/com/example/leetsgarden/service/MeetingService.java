@@ -4,6 +4,7 @@ import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.repository.MeetingRepository;
 import com.example.leetsgarden.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -38,6 +39,17 @@ public class MeetingService {
 
     public Meeting findById(Long id) {
         return meetingRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    }
+
+    public List<MeetingResponse> findByUserAll(String userName) {
+        User user = userRepository.findByUsername(userName).get();
+        List<Meeting> MeetingList = meetingRepository.findAll();
+        return MeetingList.stream()
+                .filter(s -> s.getUserMeetings()
+                        .stream()
+                        .anyMatch(userMeeting -> userMeeting.getUser().equals(user)))
+                .map(meeting -> MeetingResponse.from(meeting))
+                .toList();
     }
 
     @Transactional
