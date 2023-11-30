@@ -53,7 +53,7 @@ public class SecurityConfig {
                                 .requestMatchers("/meeting-info").hasRole("ADMIN")
                                 .requestMatchers(HttpMethod.POST, "/meetings").hasRole("ADMIN")
                                 .requestMatchers("/user/**").hasRole("USER")
-                                .anyRequest().permitAll()
+                                .anyRequest().hasRole("USER")
                 )
                 .addFilterBefore(new JwtAuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling((exceptionConfig) ->
