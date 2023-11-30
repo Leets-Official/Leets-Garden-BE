@@ -3,6 +3,7 @@ package com.example.leetsgarden.dto.response;
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.domain.UserMeeting;
+import com.example.leetsgarden.domain.WeeklyMeetings;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -21,6 +22,13 @@ public class MeetingResponse {
     private String meetingDay;
 
     private List<User> userList;
+
+//    public MeetingResponse(MeetingResponse Meeting){
+//        this.id = Meeting.getId();
+//        this.meetingName = Meeting.getMeetingName();
+//        this.meetingDay = Meeting.getMeetingDay();
+//        this.userList = Meeting.getUserList();
+//    }
 
     public static MeetingResponse from(Meeting meeting) {
         MeetingResponse meetingResponse = MeetingResponse.builder()

@@ -9,7 +9,11 @@ import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/meeting")
 @RequiredArgsConstructor
@@ -29,6 +33,13 @@ public class MeetingApiController {
     public ResponseEntity<MeetingResponse> findById(@PathVariable Long id) {
         Meeting meeting = meetingService.findById(id);
         return ResponseEntity.ok().body(MeetingResponse.from(meeting));
+    }
+
+    @Operation(summary = "유저의 모든 모임 조회", description = "유저의 모든 모임을 조회합니다.", tags = {"MeetingApiController"})
+    @GetMapping("my")
+    public ResponseEntity<List<MeetingResponse>> findByUserAll(Authentication authentication) {
+        List<MeetingResponse> meetings = meetingService.findByUserAll(authentication.getName());
+        return ResponseEntity.ok().body(meetings);
     }
 
     @Operation(summary = "모임수정", description = "모임의 세부정보를 수정할 수 있습니다. ", tags = {"MeetingApiController"})
