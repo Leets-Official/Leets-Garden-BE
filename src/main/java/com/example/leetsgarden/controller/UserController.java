@@ -6,10 +6,12 @@ import com.example.leetsgarden.dto.response.RegisterResponse;
 import com.example.leetsgarden.dto.response.UserResponse;
 import com.example.leetsgarden.service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "User", description = "user API")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
