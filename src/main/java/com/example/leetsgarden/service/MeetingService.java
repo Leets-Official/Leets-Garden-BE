@@ -4,6 +4,7 @@ import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.dto.response.MeetingIdNameResponse;
 import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.repository.MeetingRepository;
 import com.example.leetsgarden.repository.UserRepository;
@@ -48,7 +49,7 @@ public class MeetingService {
                 .filter(s -> s.getUserMeetings()
                         .stream()
                         .anyMatch(userMeeting -> userMeeting.getUser().equals(user)))
-                .map(meeting -> MeetingResponse.from(meeting))
+                .map(MeetingResponse::from)
                 .toList();
     }
 
@@ -57,5 +58,11 @@ public class MeetingService {
         Meeting meeting = meetingRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("모임이 존재하지 않습니다"));
         meeting.update(request, userRepository);
         return meeting;
+    }
+
+    public List<MeetingIdNameResponse> findAll() {
+        return meetingRepository.findAll().stream()
+                .map(MeetingIdNameResponse::from)
+                .toList();
     }
 }

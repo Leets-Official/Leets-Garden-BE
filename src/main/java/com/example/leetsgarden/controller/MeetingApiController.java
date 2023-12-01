@@ -3,6 +3,7 @@ package com.example.leetsgarden.controller;
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.dto.response.MeetingIdNameResponse;
 import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.service.MeetingService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,7 +33,7 @@ public class MeetingApiController {
 
     @Operation(summary = "생성된 모임 조회", description = "생성한 모임을 조회합니다.", tags = {"MeetingApiController"})
     @GetMapping("/{id}")
-    public ResponseEntity<MeetingResponse> findById(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long id) {
+    public ResponseEntity<MeetingResponse> findById(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH) @PathVariable Long id) {
         Meeting meeting = meetingService.findById(id);
         return ResponseEntity.ok().body(MeetingResponse.from(meeting));
     }
@@ -46,8 +47,14 @@ public class MeetingApiController {
 
     @Operation(summary = "모임수정", description = "모임의 세부정보를 수정할 수 있습니다. ", tags = {"MeetingApiController"})
     @PatchMapping("/{id}")
-    public ResponseEntity<MeetingResponse> update(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH)@PathVariable Long id, @RequestBody UpdateMeetingRequest request) {
+    public ResponseEntity<MeetingResponse> update(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH) @PathVariable Long id, @RequestBody UpdateMeetingRequest request) {
         Meeting updatedMeeting = meetingService.updateById(id, request);
         return ResponseEntity.ok().body(MeetingResponse.from(updatedMeeting));
+    }
+
+    @Operation(summary = "모든 모임 조회", description = "모든 모임을 조회합니다.", tags = {"MeetingApiController"})
+    @GetMapping("/all")
+    public ResponseEntity<List<MeetingIdNameResponse>> findAll(){
+        return ResponseEntity.ok().body(meetingService.findAll());
     }
 }
