@@ -1,14 +1,10 @@
 package com.example.leetsgarden.dto.response;
 
 import com.example.leetsgarden.domain.User;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class AllUsersResponse {
