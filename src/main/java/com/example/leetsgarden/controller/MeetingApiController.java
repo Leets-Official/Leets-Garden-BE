@@ -3,6 +3,7 @@ package com.example.leetsgarden.controller;
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.dto.response.AllUsersResponse;
 import com.example.leetsgarden.dto.response.MeetingIdNameResponse;
 import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.service.MeetingService;
@@ -57,4 +58,12 @@ public class MeetingApiController {
     public ResponseEntity<List<MeetingIdNameResponse>> findAll(){
         return ResponseEntity.ok().body(meetingService.findAll());
     }
+
+    @Operation(summary = "모든 유저 조회", description = "모든 유저의 ID와 이름을 조회합니다.", tags = {"MeetingApiController"})
+    @GetMapping("/all-users")
+    public ResponseEntity<List<AllUsersResponse>> findAllUsers() {
+        List<AllUsersResponse> allUsers = meetingService.findAllUsers();
+        return ResponseEntity.ok().body(allUsers);
+    }
+
 }
