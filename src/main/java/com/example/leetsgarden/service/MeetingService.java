@@ -4,6 +4,7 @@ import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.domain.User;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
+import com.example.leetsgarden.dto.response.AllUsersResponse;
 import com.example.leetsgarden.dto.response.MeetingIdNameResponse;
 import com.example.leetsgarden.dto.response.MeetingResponse;
 import com.example.leetsgarden.repository.MeetingRepository;
@@ -65,4 +66,13 @@ public class MeetingService {
                 .map(MeetingIdNameResponse::from)
                 .toList();
     }
+
+    public List<AllUsersResponse> findAllUsers() {
+        List<User> allUsers = userRepository.findAll();
+        return allUsers.stream()
+                .map(AllUsersResponse::fromEntity)
+                .toList();
+    }
+
+
 }

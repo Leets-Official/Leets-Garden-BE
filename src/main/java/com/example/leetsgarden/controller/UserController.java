@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -31,4 +33,5 @@ public class UserController {
     public ResponseEntity<UserResponse> getUser(@RequestParam String username) throws Exception {
         return userService.getUser(username);
     }
+
 }
