@@ -28,11 +28,11 @@ public class WeeklyMeetingsService {
     private final UserRepository userRepository;
 
     @Transactional
-    public WeeklyMeetings save(AddWeeklyMeetingsRequest request) {
+    public WeeklyMeetingsResponse save(AddWeeklyMeetingsRequest request) {
         Meeting savedMeeting = meetingRepository.findById(request.getMeetingId()).orElseThrow(() -> new IllegalArgumentException("모임이 존재하지 않습니다."));
 
         WeeklyMeetings weeklyMeetings = new WeeklyMeetings(request, savedMeeting);
-        weeklyMeetingsRepository.save(weeklyMeetings);
+        WeeklyMeetings weeklyMeeting = weeklyMeetingsRepository.save(weeklyMeetings);
 
         List<UserMeeting> userMeetings = savedMeeting.getUserMeetings();
 
@@ -40,7 +40,7 @@ public class WeeklyMeetingsService {
             Attendance attendance = new Attendance(userMeeting, weeklyMeetings);
             attendanceRepository.save(attendance);
         }
-        return weeklyMeetings;
+        return new WeeklyMeetingsResponse(weeklyMeeting, attendanceRepository.findByWeeklyMeetings_Id(weeklyMeeting.getId()));
     }
 
     public List<WeeklyMeetingsResponse> findAll() {
@@ -49,7 +49,7 @@ public class WeeklyMeetingsService {
 
         return weeklyMeetingsList.stream()
                 .filter(s -> !s.getMeetingDate().isBefore(now))
-                .map(WeeklyMeetingsResponse::new)
+                .map(s -> new WeeklyMeetingsResponse(s, attendanceRepository.findByWeeklyMeetings_Id(s.getId())))
                 .toList();
     }
 
@@ -62,7 +62,7 @@ public class WeeklyMeetingsService {
                 .filter(s -> s.getMeeting().getUserMeetings()
                         .stream()
                         .anyMatch(userMeeting -> userMeeting.getUser().equals(user)))
-                .map(WeeklyMeetingsResponse::new)
+                .map(s -> new WeeklyMeetingsResponse(s, attendanceRepository.findByWeeklyMeetings_Id(s.getId())))
                 .toList();
     }
 
