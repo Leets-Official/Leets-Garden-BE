@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @Operation(summary = "회원등록", description = "회원을 등록할 수 있습니다. ", tags = {"UserController"})
-    @PostMapping(value = "/register")
+    @PostMapping(value = "/signup")
     public ResponseEntity<RegisterResponse> signup(@RequestBody AddUserRequest request) throws Exception {
         return userService.register(request);
     }
