@@ -29,7 +29,7 @@ public class UserController {
         return userService.register(request);
     }
     @Operation(summary = "회원조회", description = "회원을 조회할 수 있습니다. ", tags = {"UserController"})
-    @GetMapping("/user")
+    @GetMapping("/users")
     public ResponseEntity<UserResponse> getUser(@RequestParam String username) throws Exception {
         return userService.getUser(username);
     }
