@@ -9,13 +9,14 @@ import lombok.Getter;
 public class MeetingIdNameResponse {
 
     private Long id;
-
     private String name;
+    private String meetingDay;
 
     public static MeetingIdNameResponse from(Meeting meeting) {
         return MeetingIdNameResponse.builder()
                 .id(meeting.getId())
                 .name(meeting.getName())
+                .meetingDay(meeting.getMeetingDay())
                 .build();
     }
 }
