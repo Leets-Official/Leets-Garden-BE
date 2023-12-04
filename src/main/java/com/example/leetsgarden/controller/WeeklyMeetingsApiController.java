@@ -1,6 +1,5 @@
 package com.example.leetsgarden.controller;
 
-import com.example.leetsgarden.domain.WeeklyMeetings;
 import com.example.leetsgarden.dto.request.AddWeeklyMeetingsRequest;
 import com.example.leetsgarden.dto.response.UserAttendanceDetailsResponse;
 import com.example.leetsgarden.dto.response.WeeklyMeetingsResponse;
@@ -25,8 +24,8 @@ public class WeeklyMeetingsApiController {
     @Operation(summary = "매주 모임승인페이지", description = "매주 진행하는 시간과 변동가능한 정보를 입력하면 출석페이지로 연동됩니다.", tags = {"WeeklyMeetingsApiController"})
     @PostMapping
     public ResponseEntity<WeeklyMeetingsResponse> save(@RequestBody AddWeeklyMeetingsRequest request) {
-        WeeklyMeetings weeklyMeetings = weeklyMeetingsService.save(request);
-        return ResponseEntity.status(HttpStatus.CREATED).body(new WeeklyMeetingsResponse(weeklyMeetings));
+        WeeklyMeetingsResponse weeklyMeetingsResponse = weeklyMeetingsService.save(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body(weeklyMeetingsResponse);
     }
 
     @Operation(summary = "매주 진행되는 모임조회", description = "매주 진행하는 모임의 정보를 조회합니다. ", tags = {"WeeklyMeetingsApiController"})
