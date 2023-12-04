@@ -18,10 +18,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import org.springframework.web.filter.CorsFilter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 
 import java.io.IOException;
 import java.util.List;
@@ -37,6 +34,7 @@ public class SecurityConfig {
                 .httpBasic((httpBasicConfig) ->
                         httpBasicConfig.disable()
                 )
+                .cors(AbstractHttpConfigurer::disable)
                 .csrf((csrfConfig) ->
                         csrfConfig.disable()
                 )
