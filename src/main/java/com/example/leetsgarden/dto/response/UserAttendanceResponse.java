@@ -10,10 +10,14 @@ public class UserAttendanceResponse {
     private final String name;
     private final Long attendanceId;
     private final AttendanceType attendanceType;
+    private final String username;
+    private final String fieldType;
 
     public UserAttendanceResponse(Attendance attendance) {
         this.name = attendance.getUser().getName();
         this.attendanceId = attendance.getId();
         this.attendanceType = attendance.getAttType();
+        this.username = attendance.getUser().getUsername();
+        this.fieldType = attendance.getUser().getFieldType();
     }
 }
