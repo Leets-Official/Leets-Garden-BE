@@ -1,11 +1,14 @@
 package com.example.leetsgarden.controller;
 
+import com.example.leetsgarden.domain.Attendance;
 import com.example.leetsgarden.domain.Meeting;
 import com.example.leetsgarden.dto.request.AddMeetingRequest;
 import com.example.leetsgarden.dto.request.UpdateMeetingRequest;
 import com.example.leetsgarden.dto.response.AllUsersResponse;
+import com.example.leetsgarden.dto.response.MeetingAllResponse;
 import com.example.leetsgarden.dto.response.MeetingIdNameResponse;
 import com.example.leetsgarden.dto.response.MeetingResponse;
+import com.example.leetsgarden.service.AttendanceService;
 import com.example.leetsgarden.service.MeetingService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -24,6 +27,7 @@ import java.util.List;
 public class MeetingApiController {
 
     private final MeetingService meetingService;
+    private final AttendanceService attendanceService;
 
     @Operation(summary = "모임생성", description = "모임 이름과 장소 등의 세부정보를 입력하여 모임을 생성합니다. ", tags = {"MeetingApiController"})
     @PostMapping
@@ -34,9 +38,10 @@ public class MeetingApiController {
 
     @Operation(summary = "생성된 모임 조회", description = "생성한 모임을 조회합니다.", tags = {"MeetingApiController"})
     @GetMapping("/{id}")
-    public ResponseEntity<MeetingResponse> findById(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH) @PathVariable Long id) {
+    public ResponseEntity<MeetingAllResponse> findById(@Parameter(name = "id", description = "meeting 의 id", in = ParameterIn.PATH) @PathVariable Long id) {
         Meeting meeting = meetingService.findById(id);
-        return ResponseEntity.ok().body(MeetingResponse.from(meeting));
+        List<Attendance> attendances = attendanceService.findByMeetingId(id);
+        return ResponseEntity.ok().body(new MeetingAllResponse(meeting, attendances));
     }
 
     @Operation(summary = "유저의 모든 모임 조회", description = "유저의 모든 모임을 조회합니다.", tags = {"MeetingApiController"})
