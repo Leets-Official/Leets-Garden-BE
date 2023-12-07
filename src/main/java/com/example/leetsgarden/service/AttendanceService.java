@@ -42,4 +42,8 @@ public class AttendanceService {
         List<Attendance> attendances = attendanceRepository.findByWeeklyMeetings_Meeting_Id(meetingId);
         return attendances.stream().map(AttendanceResponse::from).toList();
     }
+
+    public List<Attendance> findByMeetingId(Long meetingId){
+        return attendanceRepository.findByWeeklyMeetings_Meeting_Id(meetingId);
+    }
 }
